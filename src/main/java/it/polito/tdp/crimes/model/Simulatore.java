@@ -16,7 +16,7 @@ import it.polito.tdp.crimes.model.Evento.EventType;
 
 public class Simulatore {
 	
-	//INPUT
+	//DATI INPUT
 	Graph<Long, DefaultWeightedEdge> grafo;
 	private List<Event> eventi;
 	private int mese;
