@@ -25,13 +25,13 @@ public class FXMLController {
     private URL location;
 
     @FXML // fx:id="boxAnno"
-    private ComboBox<?> boxAnno; // Value injected by FXMLLoader
+    private ComboBox<Integer> boxAnno; // Value injected by FXMLLoader
 
     @FXML // fx:id="boxMese"
-    private ComboBox<?> boxMese; // Value injected by FXMLLoader
+    private ComboBox<Integer> boxMese; // Value injected by FXMLLoader
 
     @FXML // fx:id="boxGiorno"
-    private ComboBox<?> boxGiorno; // Value injected by FXMLLoader
+    private ComboBox<Integer> boxGiorno; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnCreaReteCittadina"
     private Button btnCreaReteCittadina; // Value injected by FXMLLoader
@@ -47,11 +47,32 @@ public class FXMLController {
 
     @FXML
     void doCreaReteCittadina(ActionEvent event) {
+    	
+    	
+    	int anno = boxAnno.getValue();
+    	this.model.creaGrafo(anno);
+    	txtResult.appendText(this.model.getVertici()+"\n");
+    	txtResult.appendText(this.model.getEdge()+"\n");
+    	
+    	txtResult.appendText(this.model.getAdiacenze());
 
     }
 
     @FXML
     void doSimula(ActionEvent event) {
+    	
+    	txtResult.clear();
+    	
+    	int anno = boxAnno.getValue();
+    	int mese = boxMese.getValue();
+    	int giorno = boxGiorno.getValue();
+    	int N = Integer.parseInt(txtN.getText());
+    	
+    	
+    	this.model.simula(N, anno, mese, giorno);
+    	
+    	txtResult.setText(""+this.model.eventiMalGestiti);
+    	
 
     }
 
@@ -69,5 +90,15 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	for(int i=2014;i<=2017;i++) {
+    		boxAnno.getItems().add(i);
+    	}
+    	for(int i=1;i<=31;i++) {
+    		boxGiorno.getItems().add(i);
+    	}
+    	for(int i=1;i<=12;i++) {
+    		boxMese.getItems().add(i);
+    	}
     }
 }

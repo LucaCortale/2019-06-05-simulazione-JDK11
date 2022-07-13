@@ -2,6 +2,9 @@ package it.polito.tdp.crimes.model;
 
 import java.time.LocalDateTime;
 
+import com.javadocmd.simplelatlng.LatLng;
+import com.javadocmd.simplelatlng.LatLngTool;
+
 public class Event {
 	
 	private Long incident_id;
@@ -18,6 +21,7 @@ public class Event {
 	private String neighborhood_id;
 	private Integer is_crime;
 	private Integer is_traffic;
+	public LatLng coord;
 	
 	public Event(Long incident_id, Integer offense_code, Integer offense_code_extension, String offense_type_id,
 			String offense_category_id, LocalDateTime reported_date, String incident_address, double geo_lon,
@@ -38,6 +42,7 @@ public class Event {
 		this.neighborhood_id = neighborhood_id;
 		this.is_crime = is_crime;
 		this.is_traffic = is_traffic;
+		coord = new  LatLng(geo_lon,geo_lat);
 	}
 	
 	public Long getIncident_id() {
